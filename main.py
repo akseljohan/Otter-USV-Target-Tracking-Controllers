@@ -84,7 +84,7 @@ printVehicleinfo(vehicle, sampleTime, N)
 def main():
     # add the functionality to stop the simulation while running
     break_program = False
-
+    vehicle.C
     def on_press(key):
         if key == keyboard.Key.end:
             #print('end pressed')

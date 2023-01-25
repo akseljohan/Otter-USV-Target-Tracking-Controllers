@@ -240,7 +240,7 @@ class otter:
         # Input vector
         n = np.array([u_actual[0], u_actual[1]])
 
-        # Current vessel velocities
+        # Current velocities
         u_c = self.V_c * math.cos(self.beta_c - eta[5])  # current surge vel.
         v_c = self.V_c * math.sin(self.beta_c - eta[5])  # current sway vel.
 
@@ -260,6 +260,7 @@ class otter:
         CA[5, 1] = 0  # if nonzero, must be balanced by adding nonlinear damping
 
         C = CRB + CA
+
 
         # Ballast
         g_0 = np.array([0.0, 0.0, 0.0, 0.0, self.trim_moment, 0.0])
