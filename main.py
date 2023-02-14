@@ -19,12 +19,12 @@ import simulator
 
 from python_vehicle_simulator.vehicles import *
 from python_vehicle_simulator.lib import *
-
+from otter import otter
 import utils
 
 # Simulation parameters:
 sampleTime = 0.02  # sample time
-N = 10000  # number of samples
+N = 1000  # number of samples
 
 # 3D plot and animation parameters where browser = {firefox,chrome,safari,etc.}
 numDataPoints = 50  # number of 3D data points
@@ -59,7 +59,7 @@ match no:  # the match statement requires Python >= 3.10
     case '2':
         vehicle = frigate('headingAutopilot', 10.0, 100.0)
     case '3':
-        vehicle = otter('headingAutopilot', 100.0, 0.3, -30.0, 200.0)
+        vehicle = otter.otter('headingAutopilot', 0.0, 0.0, 0, 000.0)
     case '4':
         vehicle = ROVzefakkel('headingAutopilot', 3.0, 100.0)
     case '5':
@@ -84,7 +84,7 @@ printVehicleinfo(vehicle, sampleTime, N)
 def main():
     # add the functionality to stop the simulation while running
     break_program = False
-    vehicle.C
+
     def on_press(key):
         if key == keyboard.Key.end:
             #print('end pressed')
@@ -100,13 +100,13 @@ def main():
             listener.stop()
         listener.join()
 
-    print(simData.shape)
+    #print(simData.shape)
     x = simData[:, 0]
     y = simData[:, 1]
     z = simData[:, 2]
-    print(x)
-    print(y)
-    print(z)
+    #print(x)
+    #print(y)
+    #print(z)
     plotVehicleStates(simTime, simData, 1)
     plotControls(simTime, simData, vehicle, 2)
     plot3D(simData, numDataPoints, FPS, filename, 3)

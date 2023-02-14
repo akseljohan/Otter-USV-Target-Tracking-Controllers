@@ -1,0 +1,39 @@
+#MPC optimizer
+
+
+#ModelSpesifications
+model_name: 'maryamnet'
+models:
+  exampleNet:
+    input_shape: [265, 256, 3]
+    loss: "binary_crossentropy"
+    metrics: "accuracy"
+
+  maryamnet:
+    input_shape: [ 224, 224, 3 ]
+    loss: "binary_crossentropy"
+    metrics: "accuracy"
+
+  akselnet:
+    input_shape: [224, 224, 3]
+    loss: "binary_crossentropy"
+    metrics: "accuracy"
+
+  resNet50_detector:
+    input_shape: [ 224, 224, 3 ]
+    loss: "binary_crossentropy"
+    metrics: "accuracy"
+
+  resNet151_detector:
+    input_shape: [ 224, 224, 3 ]
+    loss: "binary_crossentropy"
+    metrics: "accuracy"
+
+  combined:
+    input_shape: [ 224, 224, 3 ]
+    loss: "binary_crossentropy"
+    metrics: "accuracy"
+
+#Logs and model storage
+tensorboard:
+  log_dir: logs #also de directory for the best models

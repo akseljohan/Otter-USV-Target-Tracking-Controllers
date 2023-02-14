@@ -36,10 +36,3 @@ def MPC(target_position, initial_state, params, horizon=10, dt=0.1):
     result = minimize(objective, control_init, bounds=control_bounds)
     return result.x[:3]
 
-
-# Example usage
-target_position = [10, 20, np.pi / 4]
-initial_state = [5, 15, np.pi / 8, 1, 2, 0.5]
-params = [100, 50, 0.1, 0.2, 0.3]
-control = MPC(target_position, initial_state, params)
-print(control)
