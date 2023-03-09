@@ -43,6 +43,7 @@ import numpy as np
 import math
 from python_vehicle_simulator.lib.control import PIDpolePlacement
 from python_vehicle_simulator.lib.gnc import Smtrx, Hmtrx, m2c, crossFlowDrag, sat
+import mpc.TargetTrackingMPC as mpc
 
 import utils
 
@@ -67,8 +68,10 @@ class otter:
             V_current=0,
             beta_current=0,
             tau_X=120
-    ):
 
+
+    ):
+        self.target = None
         # Constants
         D2R = math.pi / 180  # deg2rad
         g = 9.81  # acceleration of gravity (m/s^2)
@@ -80,23 +83,29 @@ class otter:
                     + str(r)
                     + " deg"
             )
+        elif controlSystem == "TargetTrackingMPC":
+            self.controlDescription = (
+                "target tracking objective"
+            )
         else:
             self.controlDescription = "Step inputs for n1 and n2"
             controlSystem = "stepInput"
 
+        self.__target_tracking_controller = None
         self.ref = r
         self.ref = r
         self.V_c = V_current
-        self.beta_c = beta_current * D2R #angrepsvinkelen mot otteren
+        self.beta_c = beta_current * D2R  # angrepsvinkelen mot otteren
         self.controlMode = controlSystem
         self.tauX = tau_X  # surge force (N)
 
         # Initialize the Otter USV model
-        self.T_n = 1.0  # propeller time constants (s)
+        self.T_n = 0.5  # propeller time constants (s)
         self.L = 2.0  # Length (m)
         self.L = 2.0  # Length (m)
         self.B = 1.08  # beam (m)
-        self.nu = np.array([0, 0, 0, 0, 0, 0], float)  # velocity vector [surge(u), sway(v), have(w),roll(p),pitch(q),yaw(r)]
+        self.nu = np.array([0, 0, 0, 0, 0, 0],
+                           float)  # velocity vector [surge(u), sway(v), have(w),roll(p),pitch(q),yaw(r)]
         # For the 3DOF otter, whe will have an underactuated equation, where the the components in the vector will be surge, sway and yaw, the rest is 0.
 
         self.u_actual = np.array([0, 0], float)  # propeller revolution states
@@ -110,14 +119,14 @@ class otter:
 
         # Vehicle parameters
         self.m = 55.0  # mass (kg)F
-        m= self.m
+        m = self.m
         self.mp = 25.0  # Payload (kg)
         mp = self.mp
         self.m_total = m + mp
         self.rp = np.array([0, 0, -0.35], float)  # location of payload (m)
         rp = self.rp
         self.rg = np.array([0.2, 0, -0.2], float)  # CG for hull only (m)
-        rg = self.rg #jalla løsning !
+        rg = self.rg  # jalla løsning !
         rg = (m * rg + mp * rp) / (m + mp)  # CG corrected for payload
         self.rg = rg
         self.S_rg = Smtrx(rg)
@@ -157,7 +166,7 @@ class otter:
         MRB_CG[3:6, 3:6] = self.Ig
         MRB = self.H_rg.T @ MRB_CG @ self.H_rg
         self.MRB = MRB
-        #print(f"otter MRB = {self.MRB}")
+        # print(f"otter MRB = {self.MRB}")
 
         # Hydrodynamic added mass (best practice)
         Xudot = -0.1 * m
@@ -168,7 +177,7 @@ class otter:
         Nrdot = -1.7 * self.Ig[2, 2]
 
         self.MA = -np.diag([Xudot, Yvdot, Zwdot, Kpdot, Mqdot, Nrdot])
-        #print(self.MA)
+        # print(self.MA)
         # System mass matrix
         self.M = MRB + self.MA
         self.Minv = np.linalg.inv(self.M)
@@ -214,8 +223,8 @@ class otter:
         Mq = -2 * 0.4 * w5 * self.M[4, 4]
         Nr = -self.M[5, 5] / T_yaw  # specified by the time constant T_yaw
 
-        self.D = -np.diag([Xu, Yv, Zw, Kp, Mq, Nr]) #D-matrisen til Otteren
-        #print(self.D)
+        self.D = -np.diag([Xu, Yv, Zw, Kp, Mq, Nr])  # D-matrisen til Otteren
+        # print(self.D)
         # Trim: theta = -7.5 deg corresponds to 13.5 cm less height aft
         self.trim_moment = 0
         self.trim_setpoint = 280
@@ -265,14 +274,13 @@ class otter:
         CRB_CG[3:6, 3:6] = -Smtrx(np.matmul(self.Ig, nu[3:6]))
         CRB = self.H_rg.T @ CRB_CG @ self.H_rg  # transform CRB from CG to CO(Body)
 
-        #print(f"CRB: {utils.convert_6DOFto3DOF(CRB)}")
+        # print(f"CRB: {utils.convert_6DOFto3DOF(CRB)}")
         CA = m2c(self.MA, nu_r)
         CA[5, 0] = 0  # assume that the Munk moment in yaw can be neglected
         CA[5, 1] = 0  # if nonzero, must be balanced by adding nonlinear damping
-        #print(f"CA: {utils.convert_6DOFto3DOF(CA)}")
+        # print(f"CA: {utils.convert_6DOFto3DOF(CA)}")
         C = CRB + CA
-        #print(f"C: {utils.convert_6DOFto3DOF(C)}")
-
+        # print(f"C: {utils.convert_6DOFto3DOF(C)}")
 
         # Ballast
         g_0 = np.array([0.0, 0.0, 0.0, 0.0, self.trim_moment, 0.0])
@@ -303,9 +311,9 @@ class otter:
         # Hydrodynamic linear(surge) damping(surge resistance) + nonlinear yaw damping
         tau_damp = -np.matmul(self.D, nu_r)
         tau_damp[5] = tau_damp[5] - 10 * self.D[5, 5] * abs(nu_r[5]) * nu_r[5]
-        #print(f"tau_damp_shape: {tau_damp}")
+        # print(f"tau_damp_shape: {tau_damp}")
 
-        tau_crossflow = crossFlowDrag(self.L, self.B_pont, self.T, nu_r)#(Cross-flow drags .158 i fossen)
+        tau_crossflow = crossFlowDrag(self.L, self.B_pont, self.T, nu_r)  # (Cross-flow drags .158 i fossen)
 
         # State derivatives (with dimension)
         sum_tau = (
@@ -313,10 +321,10 @@ class otter:
                 + tau_damp
                 + tau_crossflow
                 - np.matmul(C, nu_r)
-                - np.matmul(self.G, eta)  #side 181 ligning 7.250, kun gjeldende i 6DOF
+                - np.matmul(self.G, eta)  # side 181 ligning 7.250, kun gjeldende i 6DOF
                 - g_0
         )
-        #print(f"sum_tau = tau + tau_damp + tau_crossflow - C(nu) - G - g_0: \n"
+        # print(f"sum_tau = tau + tau_damp + tau_crossflow - C(nu) - G - g_0: \n"
         #      f"sum_tau = {tau} + {tau_damp} + {tau_crossflow} - {np.matmul(C, nu_r)} - {np.matmul(self.G, eta) - g_0}")
 
         nu_dot = np.matmul(self.Minv, sum_tau)  # USV kinetics (the kinematics is considered in the simulation loop)
@@ -332,89 +340,6 @@ class otter:
         u_actual = np.array(n, float)
 
         return nu, u_actual
-
-    def dynamicsAJF(self, eta, nu, u, sampleTime):
-        """
-        [nu,u_actual] = dynamics(eta,nu,u_actual,u_control,sampleTime) integrates
-        the Otter USV equations of motion using Euler's method.
-        eta = np.array([0, 0, 0, 0, 0, 0], float)    # position/attitude, user editable in the main loop
-        nu = vehicle.nu                              # velocity, defined by vehicle class
-        u_actual = vehicle.u_actual                  # actual inputs, defined by vehicle class
-        beta_c (in rad)                              # current direction (deg)
-        """
-
-
-        # Current velocities
-        u_c = self.V_c * math.cos(self.beta_c - eta[5])  # current surge vel.
-        v_c = self.V_c * math.sin(self.beta_c - eta[5])  # current sway vel.
-
-        nu_c = np.array([u_c, v_c, 0, 0, 0, 0], float)  # current velocity vector
-        nu_r = nu - nu_c  # relative velocity vector
-
-        # Rigid body and added mass Coriolis and centripetal matrices
-        # CRB_CG = [ (m+mp) * Smtrx(nu2)          O3
-        #              O3                   -Smtrx(Ig*nu2)  ](Fossen 2021, Chapter 6)
-        CRB_CG = np.zeros((6, 6))
-        CRB_CG[0:3, 0:3] = self.m_total * Smtrx(nu[3:6])
-        CRB_CG[3:6, 3:6] = -Smtrx(np.matmul(self.Ig, nu[3:6]))
-        CRB = self.H_rg.T @ CRB_CG @ self.H_rg  # transform CRB from CG to CO
-        #print(f"CRB: {utils.convert_6DOFto3DOF(CRB)}")
-        CA = m2c(self.MA, nu_r)
-        CA[5, 0] = 0  # assume that the Munk moment in yaw can be neglected
-        CA[5, 1] = 0  # if nonzero, must be balanced by adding nonlinear damping
-        #print(f"CA: {utils.convert_6DOFto3DOF(CA)}")
-        C = CRB + CA
-        #print(f"C: {utils.convert_6DOFto3DOF(C)}")
-
-
-        # Ballast
-        g_0 = np.array([0.0, 0.0, 0.0, 0.0, self.trim_moment, 0.0])
-
-        # Control forces and moments - with propeller revolution saturation
-
-
-        # Control forces and moments
-        tau = np.array(
-            [
-                u[0],
-                0,
-                0,
-                0,
-                0,
-                u[5],
-            ]
-        )
-
-        # Hydrodynamic linear(surge) damping(surge resistance) + nonlinear yaw damping
-        tau_damp = -np.matmul(self.D, nu_r)
-        tau_damp[5] = tau_damp[5] - 10 * self.D[5, 5] * abs(nu_r[5]) * nu_r[5]
-        #print(f"tau_damp_shape: {tau_damp}")
-
-        tau_crossflow = crossFlowDrag(self.L, self.B_pont, self.T, nu_r)#(Cross-flow drags .158 i fossen)
-
-        # State derivatives (with dimension)
-        sum_tau = (
-                tau
-                + tau_damp
-                + tau_crossflow
-                - np.matmul(C, nu_r)
-                - np.matmul(self.G, eta)  #side 181 ligning 7.250, kun gjeldende i 6DOF
-                - g_0
-        )
-        #print(f"sum_tau = tau + tau_damp + tau_crossflow - C(nu) - G - g_0: \n"
-        #      f"sum_tau = {tau} + {tau_damp} + {tau_crossflow} - {np.matmul(C, nu_r)} - {np.matmul(self.G, eta) - g_0}")
-
-        nu_dot = np.matmul(self.Minv, sum_tau)  # USV kinetics (the kinematics is considered in the simulation loop)
-
-
-        # Forward Euler integration [k+1]
-        nu = nu + sampleTime * nu_dot
-
-
-
-
-
-        return nu
 
     def controlAllocation(self, tau_X, tau_N):
         """
@@ -482,21 +407,23 @@ class otter:
 
         return u_control
 
-    def stepInput(self, t):
-        """
-        u = stepInput(t) generates propeller step inputs.
-        u = stepInput(t) generates propeller step inputs.
-        """
-        n1 = 100  # rad/s
-        n2 = 80
+    def target_tracking_mpc(self, initial_state, target):
+        #self.__target_tracking_controller.set_target(target)
+        if not target:
+            target = self.target
+        tau = self.__target_tracking_controller.solve_optimal_control(initial_state=initial_state, target=target)
+        #print(f"optimal control forces from MPC:{tau}")
+        tau_X = tau[0]  # desired thurs force in surge
+        tau_N = tau[2]  # desired moment among yaw
 
-        if t > 30 and t < 100:
-            n1 = 80
-            n2 = 120
-        else:
-            n1 = 0
-            n2 = 0
-
-        u_control = np.array([n1, n2], float)
-
+        u_control = np.array(self.controlAllocation(tau_X=tau_X, tau_N=tau_N), float)
+        #print(f"u_controls: {u_control}")
         return u_control
+
+    def set_target_tracking_mpc(self, MPC):
+        self.__target_tracking_controller = MPC
+
+    def set_taget_tracking_ai_model(self, ai_model):
+        None
+    def target_tracking_ai_controller(self, observations, target):
+        None

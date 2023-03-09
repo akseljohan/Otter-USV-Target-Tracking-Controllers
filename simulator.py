@@ -10,7 +10,7 @@ from pynput import keyboard
 import time
 import numpy as np
 from python_vehicle_simulator.lib import *
-
+from tqdm import tqdm
 
 # from .gnc import attitudeEuler
 
@@ -44,8 +44,6 @@ def printVehicleinfo(vehicle, sampleTime, N):
     print('---------------------------------------------------------------------------------------')
 
 
-
-
 ###############################################################################
 # Function simulate(N, sampleTime, vehicle)
 ###############################################################################
@@ -54,40 +52,42 @@ def simulate(N, sampleTime, vehicle):
     t = 0  # initial simulation time
 
     # Initial state vectors
-    eta = np.array([1, 1, 1, 1, 1, 1], float)  # position/attitude, user editable
+    eta = np.array([0, 0, 0, 0, 0, 0], float)  # position/attitude, user editable
     nu = vehicle.nu  # velocity, defined by vehicle class
     u_actual = vehicle.u_actual  # actual inputs, defined by vehicle class
 
     # Initialization of table used to store the simulation data
     simData = np.empty([0, 2 * DOF + 2 * vehicle.dimU], float)
 
+    target = [10, 10]
+
     # Simulator for-loop
-    for i in range(0, N + 1):
+    for i in tqdm(range(0, N + 1)):
 
         t = i * sampleTime  # simulation time
 
         # Vehicle specific control systems
-        if (vehicle.controlMode == 'depthAutopilot'):
-            u_control = vehicle.depthAutopilot(eta, nu, sampleTime)
-        elif (vehicle.controlMode == 'headingAutopilot'):
+
+        if (vehicle.controlMode == 'headingAutopilot'):
             u_control = vehicle.headingAutopilot(eta, nu, sampleTime)
-        elif (vehicle.controlMode == 'depthHeadingAutopilot'):
-            u_control = vehicle.depthHeadingAutopilot(eta, nu, sampleTime)
-        elif (vehicle.controlMode == 'DPcontrol'):
-            u_control = vehicle.DPcontrol(eta, nu, sampleTime)
-        elif (vehicle.controlMode == 'stepInput'):
-            u_control = vehicle.stepInput(t)
+        elif (vehicle.controlMode == 'TargetTrackingMPC'):
+            initial_states = [eta[0], eta[1], eta[5], nu[0], nu[1], nu[5]]
+            #print(initial_states)
+            u_control = vehicle.target_tracking_mpc(initial_state=initial_states, # 3DOF equation of motion based MPC, therefore the limited parts
+                                                    target=None)  # must be a [x,y], if None target from vehicle is used
+            print(f"MPC_controls: {u_control}")
 
         # Store simulation data in simData
-        signals = np.append(np.append(np.append(eta, nu), u_control), u_actual) #original script
-        #signals = np.append(np.append(np.append(eta, nu), [0, 0]), [5, 5])
+        signals = np.append(np.append(np.append(eta, nu), u_control), u_actual)  # original script
+        # signals = np.append(np.append(np.append(eta, nu), [0, 0]), [5, 5])
 
         simData = np.vstack([simData, signals])
 
         # Propagate vehicle and attitude dynamics
-        [nu, u_actual] = vehicle.dynamics(eta, nu, u_actual, u_control, sampleTime) #velocity is returned
+        [nu, u_actual] = vehicle.dynamics(eta, nu, u_actual, u_control, sampleTime)  # velocity is returned
+        #print(f"u_actual: {u_actual}")
         eta = attitudeEuler(eta, nu, sampleTime)  # possition!
-        #print(t)
+        # print(t)
 
     # Store simulation time vector
     simTime = np.arange(start=0, stop=t + sampleTime, step=sampleTime)[:, None]

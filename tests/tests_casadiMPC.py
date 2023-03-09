@@ -1,5 +1,5 @@
 import casadi as ca
-from mpc import casadiMPC_dev as campc
+from trash import casadiMPC_dev as campc
 import numpy as np
 
 #Test inputs

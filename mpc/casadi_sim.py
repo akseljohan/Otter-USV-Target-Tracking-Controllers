@@ -11,9 +11,9 @@ This is a simulator using the 3DOF model and runge kutta integrator to obtain th
 
 class OtterSimulator:
     def __init__(self, model, N = None, sample_time = None):
-        self.x = casadi_otter_model_3DOF.x
-        self.u = casadi_otter_model_3DOF.u
-        self.ode = casadi_otter_model_3DOF.ode
+        self.x = model.x
+        self.u = model.u
+        self.ode = model.ode
         self.trajectory = None
         self.N = N
         self.sample_time = sample_time
@@ -82,12 +82,16 @@ class OtterSimulator:
         plt.show()
 
 if __name__ == '__main__':
-    N = 100
+    N = 1000
     sample_time = 0.02
     x_initial = [0, 0, 0, 0, 0, 0]  # [x,y,psi,surge,sway,yaw]
-    u_controls = [200, 0, 0]  # [force surge, force sway(always zero), torque yaw]
+    u_controls = [200, 0, 10]  # [force surge, force sway(always zero), torque yaw]
+    import otter.otter as otter
+    fossen_6_dof_model = otter.otter(0, 0, 0, 0) # Now the 6DOF model is used to extract the M-matrix, the D matrix and other constants.
+     #TODO implement a clean variant of Otter_model_3DOF, where otter 6DOF is not used.
+    model = casadi_otter_model_3DOF.Casadi3dofOtterModel(fossen_6_dof_otter_model=fossen_6_dof_model)
 
-    sim = OtterSimulator(model = casadi_otter_model_3DOF, N=N, sample_time=sample_time)
+    sim = OtterSimulator(model = model, N=N, sample_time=sample_time)
     res_arr = sim.simulate(x_initial=x_initial, u_controls=u_controls, N=N, sample_time= sample_time)
 
     sim.write_sim_results(res_arr=res_arr)
