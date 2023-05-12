@@ -131,3 +131,5 @@ dmypy.json
 #dirs
 trash/
 tests/
+/trash/
+/tests/
