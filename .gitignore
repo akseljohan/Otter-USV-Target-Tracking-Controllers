@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 #dirs
-/trash
-/tests
+trash
+tests
