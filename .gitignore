@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#dirs
+trash
+tests
+/tests/
+/trash/
+/AI_controller/logs/
+/RL_controller/logs/
