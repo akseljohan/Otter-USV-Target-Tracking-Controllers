@@ -129,7 +129,9 @@ dmypy.json
 .pyre/
 
 #dirs
-trash/
-tests/
-/trash/
+trash
+tests
 /tests/
+/trash/
+/AI_controller/logs/
+/RL_controller/logs/
