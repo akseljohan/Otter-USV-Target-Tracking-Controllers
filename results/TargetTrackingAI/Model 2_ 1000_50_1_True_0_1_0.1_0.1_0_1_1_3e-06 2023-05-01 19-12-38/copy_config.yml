@@ -1,0 +1,81 @@
+
+#simulation config
+sample_time : 0.1
+
+#Vehicle parameters
+constraints:
+  forces: #(according to SNAME)
+    X: #surge
+      upper: 150
+      lower: -116
+    N: #torque among yaw
+      upper: 73
+      lower: -73
+
+
+#MPC controller parameters
+MPC:
+  debug: True
+  prediction_horizon: 10
+  sample_time: 0.2
+  solver : 'ipopt'
+  R: [0.5,0 ,0.5] #weight matrix for the controller part of the matrix (sway is set to be zero)
+  Q: [10000, 10000] #weight matrix for the state-element in the cost function
+  nlp_options: #tips: https://github-wiki-see.page/m/casadi/casadi/wiki/FAQ%3A-how-to-pass-options-to-solvers#:~:text=Options%20for%20nonlinear%20programming%20solvers%20are%20passed%20in,%3D%20nlpsol%20%28%27solver_name%27%2C%27ipopt%27%2Cnlp%2Coptions%29%20Using%20Opti%20%3A%20opti.solver%20%28%27ipopt%27%2Coptions%29
+    print_time: False
+
+  options:
+      ipopt:       #ipopt options: https://coin-or.github.io/Ipopt/OPTIONS.html
+        print_level : 0 # can be between 0-12 and will print different at  each solution
+        max_iter: 1000
+        linear_solver:
+
+
+#AI-controller parameters
+env: #invironment parameters
+  debug: False
+  render_mode: #'human'  #'human' #will render a plot every 1000 epoch (not working as it should)
+  sim_length: 0.1 # how long to run the simulation between each action during training (seconds)
+  sample_time: 0.1 # how long integration steps are used in the simulation
+  observation_space: # used to normalize the observations to the neural network
+    lower: 0
+    higher: 600 # represents the 2 x radius range of the positioning system
+  world_size: [-200,200] #represent min and max in a quadratic box shape (for now this does not
+  time_out: 1000 # how many for each episode
+  random_target: True
+  fixed_target: [30,0]
+  target_spawn_region: 50 #defines the radius of the region where the target will randomly appear, used in training if the AI
+  target_confident_region: 1 # radius, defines a confident region around the target,
+  target_cycles: 100 #how many times the target is appearing in the same spot
+  moving_target:
+    pattern: c  #None, Linear(l) or Circular(c)
+    velocity: [0.0,0.8]
+    radius: 200 #the path radius if circular movement
+
+
+
+  #Tuning coefficients for the reward function in the environment
+  c1: 0 # tuning coefficient for distance to target reward
+  c2: 1 # tuning coefficient for target reached reward
+  c3: 0.1 # tuning coefficient for controller penalty
+  c4: 0.1 # tuning coefficient for intermediate time penalty
+  c5: 0 # tuning parameter for time out penalty
+  c6: 1 # tuning parameter for distance towards target change rate (speed towards target)
+  c7: 1  # tuning coefficient for desired heading error
+
+architecture: [128,128]
+n_env: 10 #how many env to run in parallel
+n_stacked_frames: 8 # how many stacked frames to use, makes a simple "Memory" for the agent
+total_timesteps: 30_000_000
+starting_learning_rate: 0.000003 #all up until 27.03.2023 has been 0.0003, but I want to se the affect of using 0.003 in a 128x128 network
+model: 'PPO_moving_target_normalized' #prefix of the model
+#continue training paramaters
+continue_training: False
+log_dir: 'AI_controller/logs/PPO_moving_target_normalized/1000_30_5_False_1_0_0_0.1_0_0_1/2023-04-10 22-32-24'
+#'AI_controller/logs/PPO_moving_target_transferred_lr/1000_30_1_True_1_2_1_1_0_1/2023-04-07 23-16-45'
+#'AI_controller/logs/PPO_moving_target_transferred_lr/1000_30_1_True_1_2_1_1_0_1/2023-04-07 18-10-38'
+#'AI_controller/logs/PPO_end_when_reaching_target_true/500_150_5_True_0_1_1_1_0_1/2023-03-28 09-17-53'
+#'AI_controller/logs/PPO_end_when_reaching_target_true/500_150_5_True_0_1_1_1_0_1/2023-03-26 12-15-55' # relative path for the continued training
+
+
+

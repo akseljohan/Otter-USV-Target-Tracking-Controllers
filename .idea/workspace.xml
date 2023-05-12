@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8136751f-8c95-4bb8-ad4b-ef2c07b4fd9e" name="Changes" comment="" />
+    <list default="true" id="8136751f-8c95-4bb8-ad4b-ef2c07b4fd9e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/otter/otter.py" beforeDir="false" afterPath="$PROJECT_DIR$/otter/otter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/AI_1000_50_1_True_1_0_0.01_0.1_0_0_1_NED.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/AI_1000_50_1_True_1_0_0.01_0.1_0_0_1_compute_time.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/AI_1000_50_1_True_1_0_0.01_0.1_0_0_1_controls.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/AI_1000_50_1_True_1_0_0.01_0.1_0_0_1_error.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/AI_1000_50_1_True_1_0_0.01_0.1_0_0_1_velocities.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/copy_config.yml" beforeDir="false" />
+    </list>
     <list id="fd3c1238-9a85-4eb1-9a91-10b6113aee35" name="Changes by aksel" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,7 +304,7 @@
       <workItem from="1683464954040" duration="862000" />
       <workItem from="1683887788822" duration="5330000" />
       <workItem from="1683894300061" duration="153000" />
-      <workItem from="1683894468953" duration="1043000" />
+      <workItem from="1683894468953" duration="3028000" />
     </task>
     <task id="LOCAL-00001" summary="dev">
       <created>1674472685097</created>
@@ -374,7 +383,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683894664844</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="dev">
+      <created>1683895748603</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1683895748603</updated>
+    </task>
+    <task id="LOCAL-00013" summary="dev">
+      <created>1683895788450</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1683895788450</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
