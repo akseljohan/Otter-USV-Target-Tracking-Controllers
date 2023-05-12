@@ -2,21 +2,22 @@
 This is the 3-DOF Otter Model implemented in the Casadi-framework.
 The matrix coefficients are collected directly from the Otter by Fossen 2021
 """
-
+#TODO: remove the vehicle as an istance variable, and implement the matrecies directly in the model
 # TODO Clean the casadi_otteR_model_3DOF file, to only contin the nessecary details for the 3DOF-model.
 import casadi as ca
 from casadi import *
 import numpy as np
-import otter.otter as otter
-from python_vehicle_simulator.lib import gnc
-from casadi import tools as cat
-from python_vehicle_simulator.lib import gnc  # some functions from Fossen
-import matplotlib
-from matplotlib import pyplot as plt
+#import otter.otter as otter
+#from python_vehicle_simulator.lib import gnc
+#from casadi import tools as cat
+#from python_vehicle_simulator.lib import gnc  # some functions from Fossen
+#import matplotlib
+#from matplotlib import pyplot as plt
 import utils
 
 
 # otter = otter.otter(0, 0, 0, 0)
+
 class Casadi3dofOtterModel:
     def __init__(self, fossen_6_dof_otter_model):
         otter = fossen_6_dof_otter_model

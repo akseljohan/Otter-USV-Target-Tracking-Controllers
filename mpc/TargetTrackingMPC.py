@@ -8,13 +8,14 @@ import numpy as np
 
 class TargetTrackingMPC:
 
-    def __init__(self, model, N, sample_time = None, solver=None):
+    def __init__(self, model, N, sample_time=None, solver=None):
         """
         This is the MPC class for the otter takes the model from casadi_otter_model_3DOF
         The model must provide:
             ode = casadi_otter_model_3DOF.ode
             x = Casadi symobl defined in the state derivative in the ode
             u = Control inputs (must present in the ODE)
+        inspiration: https://web.casadi.org/blog/ocp/
         """
         self.model = model
         self.p = None
@@ -97,38 +98,41 @@ class TargetTrackingMPC:
         target = opti.parameter(2)
         Q = opti.parameter(2, 2)
         R = opti.parameter(3, 3)
+        I = opti.parameter(3,3)
         cf = 0
         # define cost function
-        for k in range(N): #multiple shooting method
-            # opti.subject_to(x[:,k+1] == F(x[:, k], u[:, k]))
-            cf = (((x[:2, k] - target).T @ Q @ (x[:2, k] - target)) + \
-                       (u[:, k].T @ R @ u[:, k]))
-        #cf = (ca.sumsqr((x[:2, :] - target).T @ Q @ (x[:2, :] - target)) +  (ca.sumsqr(u.T @ R @ u)))
+        # for k in range(N): #multiple shooting method
+        #    # opti.subject_to(x[:,k+1] == F(x[:, k], u[:, k]))
+        #    cf = (((x[:2, k] - target).T @ Q @ (x[:2, k] - target)) + \
+        #               (u[:, k].T @ R @ u[:, k]))
+        # cf = (ca.sumsqr((x[:2, :] - target).T @ Q @ (x[:2, :] - target)) +  (ca.sumsqr(u.T @ R @ u)))
 
 
         for k in range(N):
-            opti.subject_to(x[:, k + 1] == F(x[:, k], u[:, k]))
-            cf = (((x[:2, k] - target).T @ Q @ (x[:2, k] - target)) + \
-                  (u[:, k].T @ R @ u[:, k]))
+            opti.subject_to(x[:, k + 1] == F(x[:, k], u[:, k])) #to repect the dynamics of the system
+            cf = cf +((x[:2, k] - target).T @ Q @ (x[:2, k] - target) + ((u[:, k]-u[:, k-1]).T @ I @ (u[:, k]-u[:, k+1]))+(u[:, k]).T @ R @ (u[:, k]))
+            #cf = ((x[:2, k] - target).T @ Q @ (x[:2, k] - target) + ((u[:, k] - u[:, k - 1]).T @ I @ (u[:, k] - u[:, k - 1])) + ca.eig((u[:, k]).T @ R))
+            #cf = ((ca.norm_2((x[:2, k] - target).T  @ Q)) + (ca.norm_2((u[:, k]).T  @ R)))
+            # cf = (((x[:2, k] - target).T @ Q @ (x[:2, k] - target)) + ((u[:, k] -u[:, k+1]).T @ R @ (u[:, k] -u[:, k+1]))) #delta u
 
-        cost_function = ca.Function('cost_function', [x, u, target], [cf])
+        cost_function = ca.Function('cost_function', [x, u, target,R,Q], [cf])
 
         # create an optimization environment with a Multiple shooting discretization,
         # that means that the whole state and control trajectory is the decition variables
 
-        opti.minimize(cost_function(x, u,
-                                    target))  # objective function this is primarily the distance between the state and the reference (target)
+        opti.minimize(cost_function(x, u, target, R, Q))  # objective function this is primarily the distance between the state and the reference (target)
         # opti.subject_to(x == F(x, u))
 
-        opti.subject_to(opti.bounded(-50, u[0, :], 200))  # surge lower and upper bound
+        opti.subject_to(opti.bounded(-150, u[0, :], 150))  # surge lower and upper bound
         opti.subject_to(u[1, :] == 0)  # yaw controls == 0 always
-        opti.subject_to(opti.bounded(-50, u[2, :], 50))  # max 50 Nm torque among yaw
+        opti.subject_to(opti.bounded(-80, u[2, :], 80))  # max 50 Nm torque among yaw
         opti.subject_to(x[:, 0] == p)  # initial states must always be the initial states
+        opti.set_value(Q, np.diag(config['MPC']['Q']))
+        opti.set_value(R, np.diag(config['MPC']['R']))
+        opti.set_value(I, np.diag([1,1,1]))
+        # solver_options = {"ipopt": {"max_iter": 10, "print_level": 5}}
 
-        #solver_options = {"ipopt": {"max_iter": 10, "print_level": 5}}
 
-        opti.set_value(Q, np.diag([1, 1]))
-        opti.set_value(R, np.diag([1, 1, 1]))
 
         self.p = p
         self.x = x
@@ -156,9 +160,19 @@ class TargetTrackingMPC:
             self.opti.set_value(self.target, target)
         if config['MPC']['debug']:
             self.opti.debug.value
+        #print(f"target: {target}")
         self.opti.set_value(self.p, initial_state)
+        # self.opti.set_initial(self.x, self.x)
+        if self.latest_solv is not None:
+            #self.opti.set_initial(self.x, self.latest_solv.value(self.x))
+            self.opti.set_initial(self.u, self.latest_solv.value(self.u))
+        else:
+            self.opti.set_initial(self.u, 0)
         solv = self.opti.solve()
+        #print(solv.stats())
+        #print(solv)
         self.latest_solv = solv
+
 
         return solv.value(self.u)[:, 0]  # only returns the first in the trajectory
 
@@ -188,7 +202,6 @@ class TargetTrackingMPC:
         return f"solver: {self.solver}" \
                f"Prediction horizon: {self.N}" \
                f"sampleing time : {self.sample_time}"
-
 
 
 if __name__ == '__main__':

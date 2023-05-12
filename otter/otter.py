@@ -44,7 +44,7 @@ import math
 from python_vehicle_simulator.lib.control import PIDpolePlacement
 from python_vehicle_simulator.lib.gnc import Smtrx, Hmtrx, m2c, crossFlowDrag, sat
 import mpc.TargetTrackingMPC as mpc
-
+from config import config
 import utils
 
 
@@ -71,7 +71,11 @@ class otter:
 
 
     ):
-        self.target = None
+        self.trajectory = None
+        self.eta = None
+        self.target = config['env']['fixed_target']
+        self.sample_time = config['sample_time']
+        self.sim_length = config['env']['sim_length']
         # Constants
         D2R = math.pi / 180  # deg2rad
         g = 9.81  # acceleration of gravity (m/s^2)
@@ -85,13 +89,22 @@ class otter:
             )
         elif controlSystem == "TargetTrackingMPC":
             self.controlDescription = (
-                "target tracking objective"
+                "MPC target tracking"
+            )
+        elif controlSystem == "TargetTrackingAI":
+            self.controlDescription = (
+                "AI controlled target tracking"
+            )
+        elif controlSystem == "manual":
+            self.controlDescription = (
+                "Manual inserted n1, n2 in dynamics u_controls"
             )
         else:
             self.controlDescription = "Step inputs for n1 and n2"
             controlSystem = "stepInput"
 
         self.__target_tracking_controller = None
+        self.__ai_target_tracking_controller = None
         self.ref = r
         self.ref = r
         self.V_c = V_current
@@ -100,7 +113,7 @@ class otter:
         self.tauX = tau_X  # surge force (N)
 
         # Initialize the Otter USV model
-        self.T_n = 0.5  # propeller time constants (s)
+        self.T_n = 1  # propeller time constants (s)
         self.L = 2.0  # Length (m)
         self.L = 2.0  # Length (m)
         self.B = 1.08  # beam (m)
@@ -307,7 +320,7 @@ class otter:
                 -self.l1 * thrust[0] - self.l2 * thrust[1],
             ]
         )
-
+        #print(f"tau_actual from otter: {tau}")
         # Hydrodynamic linear(surge) damping(surge resistance) + nonlinear yaw damping
         tau_damp = -np.matmul(self.D, nu_r)
         tau_damp[5] = tau_damp[5] - 10 * self.D[5, 5] * abs(nu_r[5]) * nu_r[5]
@@ -408,6 +421,12 @@ class otter:
         return u_control
 
     def target_tracking_mpc(self, initial_state, target):
+        """
+        This method solves the optima controls
+        :param initial_state:
+        :param target:
+        :return:
+        """
         #self.__target_tracking_controller.set_target(target)
         if not target:
             target = self.target
@@ -418,12 +437,21 @@ class otter:
 
         u_control = np.array(self.controlAllocation(tau_X=tau_X, tau_N=tau_N), float)
         #print(f"u_controls: {u_control}")
-        return u_control
+        return u_control, tau
 
     def set_target_tracking_mpc(self, MPC):
         self.__target_tracking_controller = MPC
 
-    def set_taget_tracking_ai_model(self, ai_model):
-        None
-    def target_tracking_ai_controller(self, observations, target):
-        None
+    def set_target_tracking_ai_controller(self, ai_controller):
+        self.__ai_target_tracking_controller = ai_controller
+
+    def target_tracking_ai_controller(self, initial_states, target, sample_time, t):
+        #print(f"initial_states_otter:{initial_states}")
+        tau = self.__ai_target_tracking_controller.get_controller_action(initial_state= initial_states, target = target, sample_time = sample_time, t= t )
+        #print(f"optimal control forces from AI:{tau}")
+        tau_X = tau[0]  # desired thurs force in surge
+        tau_N = tau[1]  # desired moment among yaw
+
+        u_control = np.array(self.controlAllocation(tau_X=tau_X, tau_N=tau_N), float)
+        #print(u_control)
+        return u_control
