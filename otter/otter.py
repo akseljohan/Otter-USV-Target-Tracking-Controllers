@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+This file is based on the file from Fossen Vehicle Simulator but is modified for the purpose of using it in this project.
+
+Original text:
 otter.py:
     Class for the Maritime Robotics Otter USV, www.maritimerobotics.com.
     The length of the USV is L = 2.0 m. The constructors are:
@@ -87,11 +90,11 @@ class otter:
                     + str(r)
                     + " deg"
             )
-        elif controlSystem == "TargetTrackingMPC":
+        elif controlSystem == "TargetTrackingMPC": # addition in this project
             self.controlDescription = (
                 "MPC target tracking"
             )
-        elif controlSystem == "TargetTrackingAI":
+        elif controlSystem == "TargetTrackingAI": # addition in this project
             self.controlDescription = (
                 "AI controlled target tracking"
             )

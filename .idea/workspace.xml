@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8136751f-8c95-4bb8-ad4b-ef2c07b4fd9e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/otter/otter.py" beforeDir="false" afterPath="$PROJECT_DIR$/otter/otter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/AI_1000_50_1_True_1_0_0.01_0.1_0_0_1_NED.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/AI_1000_50_1_True_1_0_0.01_0.1_0_0_1_compute_time.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/AI_1000_50_1_True_1_0_0.01_0.1_0_0_1_controls.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/AI_1000_50_1_True_1_0_0.01_0.1_0_0_1_error.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/AI_1000_50_1_True_1_0_0.01_0.1_0_0_1_velocities.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/TargetTrackingAI/1000_50_1_True_1_0_0.01_0.1_0_0_1 2023-05-12 14-26-53/copy_config.yml" beforeDir="false" />
+    </list>
+    <list id="fd3c1238-9a85-4eb1-9a91-10b6113aee35" name="Changes by aksel" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="Jupyter Notebook" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/otter/otter.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/simulator.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/tests_casadiMPC.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/utils.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/venv/Lib/site-packages/casadi/casadi.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../PythonVehicleSimulator-master/PythonVehicleSimulator-master/src/python_vehicle_simulator/lib/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../PythonVehicleSimulator-master/PythonVehicleSimulator-master/src/python_vehicle_simulator/lib/mainLoop.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../PythonVehicleSimulator-master/PythonVehicleSimulator-master/src/python_vehicle_simulator/lib/plotTimeSeries.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2K8YLXD3QhRVGQLCeldhKlgU9vr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/aksel/OneDrive/ACIT-Robotikk/Master Thesis/Code/Otter-USV-AUV-glider-tracking/AI_controller/archive&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking\AI_controller\archive" />
+      <recent name="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking\AI_controller\archive\500_150_5_True_0_1_1_1_0_1 - 2023-03-28 09-17-53" />
+      <recent name="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking\AI_controller" />
+      <recent name="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking\AI_controller\logs\PPO_end_when_reaching_target_false\600_150_5_True_1_1_1_1_0_1\2023-03-19 19-37-20" />
+      <recent name="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking\AI_controller\archive\120_100_20_True_0_100_1_1_100_5\2023-03-08 11-59-11" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking\trash" />
+      <recent name="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking" />
+      <recent name="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking\AI_controller\logs\PPO_end_when_reaching_target_false\600_150_5_True_1_1_1_1_0_1\2023-03-19 19-37-46" />
+      <recent name="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking\AI_controller\models\PPO\300_200_5_True_0_10_0.5_0.1_10_1\2023-03-06 11-01-40\previously best" />
+      <recent name="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking\AI_controller\gym\env" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.AiControllerTesting">
+    <configuration name="AiControllerTesting" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Otter-USV-AUV-glider-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AI_controller/AiControllerTesting.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="AiControllerTrainer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Otter-USV-AUV-glider-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AiControllerTrainer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="MarineVehicleTargetTrackingEnv" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Otter-USV-AUV-glider-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AI_controller/gym/env" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AI_controller/gym/env/MarineVehicleTargetTrackingEnv.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Otter_USV_venv" type="PythonConfigurationType" factoryName="Python">
+      <module name="Otter-USV-AUV-glider-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="casadiMPC_dev" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Otter-USV-AUV-glider-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mpc" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/casadiMPC_dev.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Otter-USV-AUV-glider-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="simulator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Otter-USV-AUV-glider-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\aksel\OneDrive\ACIT-Robotikk\Master Thesis\Code\Otter-USV-AUV-glider-tracking\trash\simulator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Otter_USV_venv" />
+      <item itemvalue="Python.casadiMPC_dev" />
+      <item itemvalue="Python.AiControllerTrainer" />
+      <item itemvalue="Python.AiControllerTesting" />
+      <item itemvalue="Python.MarineVehicleTargetTrackingEnv" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.simulator" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.AiControllerTesting" />
+        <item itemvalue="Python.MarineVehicleTargetTrackingEnv" />
+        <item itemvalue="Python.AiControllerTrainer" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.simulator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8136751f-8c95-4bb8-ad4b-ef2c07b4fd9e" name="Changes" comment="" />
+      <created>1673357621198</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1673357621198</updated>
+      <workItem from="1673357622843" duration="5707000" />
+      <workItem from="1673420275081" duration="493000" />
+      <workItem from="1673420787610" duration="4593000" />
+      <workItem from="1673510968897" duration="25812000" />
+      <workItem from="1673613285373" duration="7219000" />
+      <workItem from="1673951894012" duration="4993000" />
+      <workItem from="1673957434203" duration="5964000" />
+      <workItem from="1674120851828" duration="7676000" />
+      <workItem from="1674401831853" duration="16218000" />
+      <workItem from="1674579603607" duration="24924000" />
+      <workItem from="1674804333651" duration="36891000" />
+      <workItem from="1675150080665" duration="76046000" />
+      <workItem from="1675668430717" duration="56234000" />
+      <workItem from="1675927893967" duration="75031000" />
+      <workItem from="1676365080468" duration="13811000" />
+      <workItem from="1676445156123" duration="81621000" />
+      <workItem from="1677483392695" duration="123714000" />
+      <workItem from="1677924669923" duration="112457000" />
+      <workItem from="1678372089190" duration="6713000" />
+      <workItem from="1678806127456" duration="7208000" />
+      <workItem from="1678864068189" duration="12208000" />
+      <workItem from="1678878778339" duration="6449000" />
+      <workItem from="1678952753451" duration="29179000" />
+      <workItem from="1679143962529" duration="11041000" />
+      <workItem from="1679237196838" duration="63265000" />
+      <workItem from="1679643979825" duration="3533000" />
+      <workItem from="1679734776646" duration="31695000" />
+      <workItem from="1679896524370" duration="135868000" />
+      <workItem from="1680676877051" duration="87243000" />
+      <workItem from="1681243648039" duration="2375000" />
+      <workItem from="1681458642849" duration="49403000" />
+      <workItem from="1682167510183" duration="51729000" />
+      <workItem from="1682491472314" duration="14507000" />
+      <workItem from="1682932645892" duration="10983000" />
+      <workItem from="1683020204529" duration="2609000" />
+      <workItem from="1683132789177" duration="3743000" />
+      <workItem from="1683464954040" duration="862000" />
+      <workItem from="1683887788822" duration="5330000" />
+      <workItem from="1683894300061" duration="153000" />
+      <workItem from="1683894468953" duration="3028000" />
+    </task>
+    <task id="LOCAL-00001" summary="dev">
+      <created>1674472685097</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1674472685097</updated>
+    </task>
+    <task id="LOCAL-00002" summary="dev">
+      <created>1674644089273</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1674644089273</updated>
+    </task>
+    <task id="LOCAL-00003" summary="dev">
+      <created>1676361179463</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676361179463</updated>
+    </task>
+    <task id="LOCAL-00004" summary="dev">
+      <created>1678369723444</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678369723444</updated>
+    </task>
+    <task id="LOCAL-00005" summary="dev">
+      <created>1683890389290</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1683890389290</updated>
+    </task>
+    <task id="LOCAL-00006" summary="dev">
+      <created>1683893202342</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1683893202342</updated>
+    </task>
+    <task id="LOCAL-00007" summary="dev">
+      <created>1683893270556</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1683893270556</updated>
+    </task>
+    <task id="LOCAL-00008" summary="dev">
+      <created>1683893337767</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1683893337767</updated>
+    </task>
+    <task id="LOCAL-00009" summary="dev">
+      <created>1683893514337</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1683893514337</updated>
+    </task>
+    <task id="LOCAL-00010" summary="dev">
+      <created>1683894184271</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1683894184271</updated>
+    </task>
+    <task id="LOCAL-00011" summary="dev">
+      <created>1683894664844</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1683894664844</updated>
+    </task>
+    <task id="LOCAL-00012" summary="dev">
+      <created>1683895748603</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1683895748603</updated>
+    </task>
+    <task id="LOCAL-00013" summary="dev">
+      <created>1683895788450</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1683895788450</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="94cfba5d-e1d1-4ef7-801d-ac4924272833">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/Users/aksel/OneDrive/ACIT-Robotikk/Master Thesis/Code/Otter-USV-AUV-glider-tracking/tests" />
+                        <option value="dir:C:/Users/aksel/OneDrive/ACIT-Robotikk/Master Thesis/Code/Otter-USV-AUV-glider-tracking/trash" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="94cfba5d-e1d1-4ef7-801d-ac4924272833" value="TOOL_WINDOW" />
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="dev" />
+    <option name="LAST_COMMIT_MESSAGE" value="dev" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/copy_config_yml$AiControllerTrainer.coverage" NAME="AiControllerTrainer Coverage Results" MODIFIED="1683888149077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/copy_config_yml$MarineVehicleTargetTrackingEnv.coverage" NAME="MarineVehicleTargetTrackingEnv Coverage Results" MODIFIED="1683888670899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AI_controller/gym/env" />
+    <SUITE FILE_PATH="coverage/Otter_USV_AUV_glider_tracking$AiControllerTesting.coverage" NAME="AiControllerTesting Coverage Results" MODIFIED="1683894411077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+  </component>
+</project>
