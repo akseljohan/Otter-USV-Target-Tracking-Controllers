@@ -10,4 +10,4 @@ The repo make use of a modifyed version of Fossen Vehicle Simulator with edited 
 
 
 
-The thesis may be found here: [thesis.pdf](https://github.com/akseljohan/Otter-USV-Target-Tracking-Controllers/files/11815137/thesis.pdf)
+The thesis may be found here: https://oda.oslomet.no/oda-xmlui/handle/11250/3100591 
